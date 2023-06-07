@@ -30,7 +30,7 @@ class TestmicroserviceController extends AbstractController
     }  
     
     #[Route('/testmicroservice/customers', name: 'app_testmicroservice_customers')]
-    public function getGustomers(CustomerRepository $customerRepository): JsonResponse
+    public function getCustomers(CustomerRepository $customerRepository): JsonResponse
     {
         $customers = $customerRepository->findAll();
         return $this->json($customers, 200, []);
@@ -56,5 +56,12 @@ class TestmicroserviceController extends AbstractController
         $customerRepository->save($customer, true);
 
         return $this->json(['message' => 'Modifié'], 200, []);
+    }
+
+    #[Route('/testmicroservice/customers/customer/{id}', name: 'app_testmicroservice_customers_customer')]
+    public function getCustomer(Customer $customer): JsonResponse
+    {
+        return $this->json($customer, 200, []);
+        
     }
 }
